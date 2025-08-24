@@ -1,0 +1,252 @@
+LAMMPS (2 Apr 2025)
+OMP_NUM_THREADS environment is not set. Defaulting to 1 thread. (src/comm.cpp:99)
+  using 1 OpenMP thread(s) per MPI task
+Loaded 1 plugins from E:\LAMMPS 64-bit 2Apr2025\plugins
+units real
+atom_style full
+boundary p p p
+
+read_data output.data
+Reading data file ...
+  orthogonal box = (-30.7565 -30.018 -30.276) to (29.2435 29.982 29.724)
+  1 by 1 by 1 MPI processor grid
+  reading atoms ...
+  3425 atoms
+  scanning bonds ...
+  4 = max bonds/atom
+  orthogonal box = (-30.7565 -30.018 -30.276) to (29.2435 29.982 29.724)
+  1 by 1 by 1 MPI processor grid
+  reading bonds ...
+  3050 bonds
+Finding 1-2 1-3 1-4 neighbors ...
+  special bond factors lj:    0        0        0       
+  special bond factors coul:  0        0        0       
+     4 = max # of 1-2 neighbors
+    12 = max # of 1-3 neighbors
+    18 = max # of 1-4 neighbors
+    22 = max # of special neighbors
+  special bonds CPU = 0.003 seconds
+  read_data CPU = 0.039 seconds
+
+pair_style lj/cut 10.0
+
+# Set pair_coeff for each pair of atom types
+pair_coeff 1 1 0.1 3.0
+pair_coeff 1 2 0.125 3.25
+pair_coeff 1 3 0.15 3.5
+pair_coeff 1 4 0.12 3.2
+pair_coeff 1 5 0.14 3.3
+pair_coeff 2 2 0.15 3.5
+pair_coeff 2 3 0.13 3.15
+pair_coeff 2 4 0.11 3.1
+pair_coeff 2 5 0.14 3.2
+pair_coeff 3 3 0.16 3.6
+pair_coeff 3 4 0.14 3.3
+pair_coeff 3 5 0.13 3.2
+pair_coeff 4 4 0.12 3.2
+pair_coeff 4 5 0.14 3.3
+pair_coeff 5 5 0.15 3.4
+
+thermo 100
+thermo_style custom step temp etotal press
+
+minimize 1.0e-4 1.0e-6 100 1000
+Generated 0 of 10 mixed pair_coeff terms from geometric mixing rule
+WARNING: Bonds are defined but no bond style is set (src/force.cpp:197)
+WARNING: Likewise 1-2 special neighbor interactions != 1.0 (src/force.cpp:199)
+Neighbor list info ...
+  update: every = 1 steps, delay = 0 steps, check = yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 12
+  ghost atom cutoff = 12
+  binsize = 6, bins = 10 10 10
+  1 neighbor lists, perpetual/occasional/extra = 1 0 0
+  (1) pair lj/cut, perpetual
+      attributes: half, newton on
+      pair build: half/bin/newton
+      stencil: half/bin/3d
+      bin: standard
+Per MPI rank memory allocation (min/avg/max) = 10.27 | 10.27 | 10.27 Mbytes
+   Step          Temp          TotEng         Press     
+         0   0              287760.81      384443.71    
+       100   0             -4277.462      -584.63996    
+Loop time of 0.587772 on 1 procs for 100 steps with 3425 atoms
+
+69.1% CPU use with 1 MPI tasks x 1 OpenMP threads
+
+Minimization stats:
+  Stopping criterion = max iterations
+  Energy initial, next-to-last, final = 
+      287760.809124281  -4241.45421964035  -4277.46196778364
+  Force two-norm initial, final = 42735.833 26.798151
+  Force max component initial, final = 1695.8195 5.5505635
+  Final line search alpha, max atom move = 0.051667891 0.28678591
+  Iterations, force evaluations = 100 100
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0.52161    | 0.52161    | 0.52161    |   0.0 | 88.74
+Bond    | 1.8e-05    | 1.8e-05    | 1.8e-05    |   0.0 |  0.00
+Neigh   | 0.054114   | 0.054114   | 0.054114   |   0.0 |  9.21
+Comm    | 0.001381   | 0.001381   | 0.001381   |   0.0 |  0.23
+Output  | 0.000593   | 0.000593   | 0.000593   |   0.0 |  0.10
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 0.01006    |            |       |  1.71
+
+Nlocal:           3425 ave        3425 max        3425 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Nghost:           1905 ave        1905 max        1905 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Neighs:         356046 ave      356046 max      356046 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 356046
+Ave neighs/atom = 103.95504
+Ave special neighs/atom = 10.277372
+Neighbor list builds = 6
+Dangerous builds = 0
+
+fix 1 all nve
+dump 1 all atom 1000 dump.zno_ctab.lammpstrj
+dump_modify 1 sort id
+
+run 10000
+Generated 0 of 10 mixed pair_coeff terms from geometric mixing rule
+WARNING: Bonds are defined but no bond style is set (src/force.cpp:197)
+WARNING: Likewise 1-2 special neighbor interactions != 1.0 (src/force.cpp:199)
+Per MPI rank memory allocation (min/avg/max) = 9.142 | 9.142 | 9.142 Mbytes
+   Step          Temp          TotEng         Press     
+       100   0             -4277.462      -584.63996    
+       200   44.935516     -4284.7774     -369.24396    
+       300   87.71756      -4294.7795     -275.64689    
+       400   117.27494     -4302.6741     -180.75755    
+       500   143.26032     -4311.175       3.5171402    
+       600   158.62536     -4316.749      -25.828687    
+       700   173.01297     -4324.1518     -34.040555    
+       800   179.76262     -4329.5259     -2.1506804    
+       900   185.78186     -4334.5218      41.05861     
+      1000   197.57922     -4340.6005      104.82256    
+      1100   202.65226     -4344.3944      93.998496    
+      1200   210.86706     -4347.4697      151.7866     
+      1300   210.53719     -4350.4113      186.78473    
+      1400   217.31358     -4353.3797      225.50904    
+      1500   217.24459     -4353.6034      190.78125    
+      1600   216.74974     -4353.5549      171.45999    
+      1700   220.41203     -4352.7494      62.126491    
+      1800   216.86293     -4352.6442      87.25498     
+      1900   216.76347     -4352.9252      16.53635     
+      2000   218.77016     -4353.3643      105.40617    
+      2100   222.95762     -4353.1165      169.2508     
+      2200   222.15729     -4354.2781      258.31746    
+      2300   223.1618      -4353.4841      172.80868    
+      2400   221.73226     -4353.0152      140.62132    
+      2500   219.04619     -4351.8772      143.29984    
+      2600   222.13642     -4351.4597      113.61621    
+      2700   218.4239      -4350.3915      130.54314    
+      2800   222.6217      -4349.0187     -1.2024227    
+      2900   222.90251     -4349.6913      92.734469    
+      3000   224.9258      -4349.9765      156.98163    
+      3100   222.18534     -4348.3231      53.084042    
+      3200   222.10069     -4348.255       104.45144    
+      3300   226.99684     -4348.5607      34.568713    
+      3400   228.60616     -4349.2076      51.457281    
+      3500   225.65717     -4347.7446      44.9508      
+      3600   230.26456     -4348.9138      130.94811    
+      3700   227.30762     -4347.9208      70.956257    
+      3800   227.68356     -4346.4802      73.12129     
+      3900   228.59212     -4346.1987      79.915131    
+      4000   221.27159     -4345.1905      81.948952    
+      4100   222.88741     -4345.0613      82.781034    
+      4200   222.6878      -4344.7311      94.512035    
+      4300   227.99121     -4345.5477      102.2733     
+      4400   230.62727     -4346.0346      78.792259    
+      4500   224.24261     -4345.0036      135.84479    
+      4600   229.49849     -4346.0042      94.776156    
+      4700   226.36082     -4345.6011      112.77978    
+      4800   228.33327     -4346.6632      142.06248    
+      4900   226.06682     -4345.6903      129.64935    
+      5000   226.08319     -4345.3318      83.763526    
+      5100   223.1064      -4346.0523      151.22073    
+      5200   227.80701     -4346.8074      66.088146    
+      5300   230.34453     -4346.9393      116.26255    
+      5400   230.45538     -4347.9067      134.31218    
+      5500   227.61816     -4348.6873      139.62512    
+      5600   230.89257     -4349.8465      230.64062    
+      5700   231.91349     -4349.2882      155.76386    
+      5800   230.33639     -4347.1636      80.364829    
+      5900   230.8328      -4348.384       166.96427    
+      6000   227.51351     -4346.5792      99.300083    
+      6100   226.51969     -4346.1841      127.23815    
+      6200   228.54581     -4346.635       137.25764    
+      6300   229.98728     -4347.1266      135.89072    
+      6400   227.46204     -4348.0639      220.05532    
+      6500   227.79001     -4347.8041      175.85076    
+      6600   234.54081     -4348.8418      179.3652     
+      6700   233.4484      -4348.7227      177.95831    
+      6800   236.67372     -4348.8617      72.222788    
+      6900   234.72512     -4349.5576      147.14687    
+      7000   229.15139     -4348.102       133.89574    
+      7100   230.58089     -4348.6559      177.52846    
+      7200   228.94716     -4347.5189      116.98867    
+      7300   230.33966     -4347.9421      114.14663    
+      7400   229.21729     -4349.3139      156.01721    
+      7500   231.18522     -4349.8793      212.54635    
+      7600   232.94209     -4348.9741      137.0913     
+      7700   234.42406     -4348.8678      121.64256    
+      7800   234.01316     -4351.2522      207.06222    
+      7900   236.51829     -4350.9411      175.77041    
+      8000   233.9347      -4349.8615      166.83495    
+      8100   237.4679      -4351.0294      174.9072     
+      8200   232.77952     -4350.9039      152.38613    
+      8300   233.95598     -4351.9022      100.77299    
+      8400   232.27613     -4351.7257      112.16407    
+      8500   232.63435     -4353.2626      212.61678    
+      8600   237.85558     -4353.7674      126.76588    
+      8700   236.62655     -4354.3869      141.61752    
+      8800   237.48889     -4355.3683      243.03673    
+      8900   237.58346     -4357.207       252.67291    
+      9000   236.51486     -4355.6557      146.98281    
+      9100   236.93107     -4356.1607      214.16955    
+      9200   238.77231     -4356.9283      215.71913    
+      9300   233.5629      -4355.1697      184.69045    
+      9400   231.8841      -4355.434       200.39508    
+      9500   235.68444     -4354.684       190.64227    
+      9600   232.95753     -4355.9462      333.97754    
+      9700   230.79094     -4355.7791      265.38223    
+      9800   235.17493     -4356.0561      245.78533    
+      9900   232.78126     -4354.9101      225.36688    
+     10000   229.48268     -4353.4677      162.18096    
+     10100   232.62544     -4353.9533      155.34918    
+WARNING: Bond/angle/dihedral extent > half of periodic box length (src/domain.cpp:1174)
+Loop time of 123.888 on 1 procs for 10000 steps with 3425 atoms
+
+Performance: 6.974 ns/day, 3.441 hours/ns, 80.718 timesteps/s, 276.459 katom-step/s
+72.0% CPU use with 1 MPI tasks x 1 OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 107.54     | 107.54     | 107.54     |   0.0 | 86.80
+Bond    | 0.005938   | 0.005938   | 0.005938   |   0.0 |  0.00
+Neigh   | 14.852     | 14.852     | 14.852     |   0.0 | 11.99
+Comm    | 0.34246    | 0.34246    | 0.34246    |   0.0 |  0.28
+Output  | 0.16789    | 0.16789    | 0.16789    |   0.0 |  0.14
+Modify  | 0.69234    | 0.69234    | 0.69234    |   0.0 |  0.56
+Other   |            | 0.2926     |            |       |  0.24
+
+Nlocal:           3425 ave        3425 max        3425 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Nghost:           2400 ave        2400 max        2400 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Neighs:         502772 ave      502772 max      502772 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 502772
+Ave neighs/atom = 146.79474
+Ave special neighs/atom = 10.277372
+Neighbor list builds = 533
+Dangerous builds = 0
+
+
+Total wall time: 0:02:04

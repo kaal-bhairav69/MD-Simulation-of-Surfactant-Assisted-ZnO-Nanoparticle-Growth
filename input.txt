@@ -1,0 +1,37 @@
+units real
+atom_style full
+boundary p p p
+
+read_data output.data
+
+pair_style lj/cut 10.0
+
+# Set pair_coeff for each pair of atom types
+pair_coeff 1 1 0.1 3.0
+pair_coeff 1 2 0.125 3.25
+pair_coeff 1 3 0.15 3.5
+pair_coeff 1 4 0.12 3.2
+pair_coeff 1 5 0.14 3.3
+pair_coeff 2 2 0.15 3.5
+pair_coeff 2 3 0.13 3.15
+pair_coeff 2 4 0.11 3.1
+pair_coeff 2 5 0.14 3.2
+pair_coeff 3 3 0.16 3.6
+pair_coeff 3 4 0.14 3.3
+pair_coeff 3 5 0.13 3.2
+pair_coeff 4 4 0.12 3.2
+pair_coeff 4 5 0.14 3.3
+pair_coeff 5 5 0.15 3.4
+
+thermo 100
+thermo_style custom step temp etotal press
+
+minimize 1.0e-4 1.0e-6 100 1000
+
+fix 1 all nve
+dump 1 all atom 1000 dump.zno_ctab.lammpstrj
+dump_modify 1 sort id
+
+run 10000
+
+

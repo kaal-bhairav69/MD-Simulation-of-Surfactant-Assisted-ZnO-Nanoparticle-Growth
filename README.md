@@ -36,19 +36,24 @@ Restart/system file: output.data
 
 ---
 
-🔬 Visualization
+🔬 Visualization:
+
 Use VMD or OVITO to visualize the trajectory:
  --vmd output.data dump.zno_ctab.lammpstrj--
 The .pdb files can be opened in VMD/PyMOL to inspect the molecular system before simulation.
 
 ---
 
-📊 Analysis
+📊 Analysis:
+
 Example Python analysis script: untitled0.py
 
 Modify to compute RDF, cluster sizes, or energy evolution from the trajectory.
 
 For more detailed analysis, see LAMMPS output (log.lammps) and use tools like MDAnalysis or OVITO Python API.
 
-✨ Author
+---
+
+✨ Author:
+
 👤 Nimit Garg , Gunjeet Kumawat, Pradeep Bishnoi
